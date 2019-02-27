@@ -3,10 +3,10 @@ language: cpp
 addons:
   sonarcloud:
     organization: "falkenrambaldi-github" # the key of the org you chose at step #3
-    
-script:
-  # other script steps might be done before running the actual analysis
-  - sonar-scanner
+
+cache:
+  directories:
+- '$HOME/.sonar/cache
 
 matrix:
   include:
@@ -67,3 +67,4 @@ script:
         - cmake ..
         - make
         - ctest
+		- sonar-scanner
