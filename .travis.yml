@@ -73,4 +73,5 @@ script:
         - cmake ..
         - make
         - ctest
+        - cp ../sonar-project.properties .
         - sonar-scanner
