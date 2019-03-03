@@ -15,10 +15,6 @@ matrix:
       osx_image: xcode10.1
       env:
         - MATRIX_EVAL="CC=clang && CXX=clang++"
-      addons:
-        sonarcloud:
-          organization: "falkenrambaldi-github"
-
     - os: linux
       addons:
         apt:
@@ -26,8 +22,6 @@ matrix:
             - ubuntu-toolchain-r-test
           packages:
             - g++-5
-        sonarcloud:
-          organization: "falkenrambaldi-github"
       env:
         - MATRIX_EVAL="CC=gcc-5 && CXX=g++-5"
     - os: linux
@@ -37,8 +31,6 @@ matrix:
             - ubuntu-toolchain-r-test
           packages:
             - g++-6
-        sonarcloud:
-          organization: "falkenrambaldi-github"
       env:
         - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6"
     - os: linux
@@ -61,8 +53,6 @@ matrix:
           packages:
             - g++-7
             - clang-5.0
-        sonarcloud:
-          organization: "falkenrambaldi-github"
       env:
         - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0"
 
@@ -76,5 +66,4 @@ script:
         - cmake ..
         - make
         - ctest
-        - if [[ "$MATRIX_EVAL" == "CC=gcc-7 && CXX=g++-7" ]]; then cp ../sonar-project.properties . && build-wrapper-linux-x86-64 --out-dir bw-output make clean all ; fi
-        - sonar-scanner
+        - if [[ "$MATRIX_EVAL" == "CC=gcc-7 && CXX=g++-7" ]]; then cp ../sonar-project.properties . && build-wrapper-linux-x86-64 --out-dir bw-output make clean all && sonar-scanner ; fi
