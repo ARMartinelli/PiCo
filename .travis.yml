@@ -76,7 +76,5 @@ script:
         - cmake ..
         - make
         - ctest
-        - cp ../sonar-project.properties .
-        - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then build-wrapper-macosx-x86  --out-dir bw-output make clean all    ; fi
-        - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then build-wrapper-linux-x86-64 --out-dir bw-output make clean all ; fi
+        - if [[ "$MATRIX_EVAL" == "CC=gcc-7 && CXX=g++-7" ]]; then cp ../sonar-project.properties . && build-wrapper-linux-x86-64 --out-dir bw-output make clean all ; fi
         - sonar-scanner
